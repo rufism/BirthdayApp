@@ -1,141 +1,102 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
+.container {
   display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
-.main {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  min-height: 100vh;
+  min-height: 100svh;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
+  padding: 32px 20px;
+  font-family: var(--font-vt323);
 }
 
-.intro {
+.logoSection {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+  padding-top: 20px;
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(70deg) brightness(0.8);
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
+.codeDisplay {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  gap: 16px;
+  flex: 1;
+  padding: 40px 0;
+}
+
+.codeDigit {
+  width: 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  text-shadow: 0 0 10px #c0ffc0;
+  font-family: var(--font-vt323);
+  letter-spacing: 0;
+}
+
+.keypad {
+  padding-bottom: 20px;
+}
+
+.keypadGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.keypadButton {
+  height: 64px;
+  font-size: 24px;
+  font-weight: 600;
+  background-color: rgba(192, 255, 192, 0.1);
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  transition: all 0.15s ease;
+  font-family: var(--font-vt323);
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.keypadButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  box-shadow: 0 0 25px rgba(192, 255, 192, 0.5), inset 0 0 15px rgba(192, 255, 192, 0.3);
+  transform: scale(0.98);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+/* Ensure minimum tap target size for mobile */
+@media (max-width: 400px) {
+  .keypadButton {
+    height: 58px;
+    font-size: 22px;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
+  .codeDigit {
+    width: 42px;
+    height: 58px;
     font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
   }
 }

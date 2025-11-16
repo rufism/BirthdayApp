@@ -1,0 +1,392 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
+  padding: 12px 8px;
+  font-family: var(--font-vt323);
+  color: #c0ffc0;
+}
+
+/* Loader Styles */
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 32px;
+}
+
+.loaderHeader {
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.6;
+  text-shadow: 0 0 10px #c0ffc0;
+}
+
+.loadingBar {
+  width: 100%;
+  max-width: 300px;
+  height: 32px;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  overflow: hidden;
+}
+
+.loadingBarFill {
+  height: 100%;
+  background-color: #c0ffc0;
+  box-shadow: 0 0 20px #c0ffc0;
+  transition: width 0.1s linear;
+}
+
+.loadingText {
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Profile Styles - Police Scanner Layout */
+.profile {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-x: hidden;
+  flex: 1;
+  justify-content: center;
+}
+
+.scannerHeader {
+  text-align: center;
+  text-shadow: 0 0 10px #c0ffc0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@media (max-width: 500px) {
+  .scannerHeader {
+    font-size: 14px;
+  }
+}
+
+/* Grid Layout - 2x5 */
+.scannerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 8px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  height: calc(100vh - 24px);
+  max-height: calc(100vh - 24px);
+}
+
+/* Header Box - Full width */
+.headerBox {
+  grid-column: span 2;
+  grid-row: 1;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  min-height: 0;
+}
+
+.headerText {
+  font-size: 18px;
+  text-shadow: 0 0 10px #c0ffc0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .headerText {
+    font-size: 14px;
+  }
+}
+
+/* Agent info Box - Full width */
+.agentInfoBox {
+  grid-column: span 2;
+  grid-row: 2;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  min-height: 0;
+}
+
+.agentInfoText {
+  font-size: 16px;
+  text-shadow: 0 0 8px #c0ffc0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .agentInfoText {
+    font-size: 13px;
+  }
+}
+
+/* Photo Box - Takes up 1 row */
+.photoBox {
+  grid-row: 3;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.photoPlaceholder {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* Info Box - Takes up 1 row */
+.infoBox {
+  grid-row: 3;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.03);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.infoValue {
+  font-size: 18px;
+  text-shadow: 0 0 8px #c0ffc0;
+  line-height: 1.2;
+}
+
+/* Description */
+.descriptionBox {
+  grid-column: span 2;
+  grid-row: 4;
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.8;
+  display: flex;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.descriptionText {
+  text-align: left;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.welcomeText {
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.dividerLine {
+  opacity: 0.5;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.menuHeader {
+  font-size: 18px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px #c0ffc0;
+  font-weight: bold;
+}
+
+.menuOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.menuItem {
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menuItem:hover {
+  text-shadow: 0 0 12px #c0ffc0;
+  padding-left: 16px;
+}
+
+.instructionText {
+  font-size: 14px;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+@media (max-width: 500px) {
+  .descriptionBox {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .menuHeader {
+    font-size: 16px;
+  }
+
+  .menuItem {
+    font-size: 14px;
+  }
+
+  .dividerLine {
+    font-size: 12px;
+  }
+}
+
+/* footer */
+.footerBox {
+  grid-column: span 2;
+  grid-row: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  min-height: 0;
+}
+
+.footerText {
+  font-size: 14px;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.divider {
+  opacity: 0.5;
+  margin: 4px 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .divider {
+    font-size: 14px;
+  }
+}
+
+/* Mission Panel */
+.missionPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.missionHeader {
+  font-size: 16px;
+  text-shadow: 0 0 10px #c0ffc0;
+  line-height: 1.4;
+}
+
+.missionContent {
+  padding: 12px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.commandLine {
+  margin-top: 8px;
+  font-size: 18px;
+  text-shadow: 0 0 10px #c0ffc0;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .infoLabel {
+    font-size: 11px;
+  }
+
+  .infoValue,
+  .statusActive {
+    font-size: 16px;
+  }
+
+  .photoPlaceholder {
+    font-size: 14px;
+  }
+
+  .missionHeader {
+    font-size: 14px;
+  }
+
+  .missionContent {
+    font-size: 14px;
+  }
+}

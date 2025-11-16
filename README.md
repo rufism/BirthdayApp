@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Mobile-First Application
+
+**This application is built exclusively for mobile devices.** While hosted on Vercel, it will be accessed only from phones. All UI components, layouts, and interactions must be mobile-friendly and optimized for small screens.
+
 ## Getting Started
 
 First, run the development server:
