@@ -48,7 +48,8 @@
   height: 100%;
   background-color: #c0ffc0;
   box-shadow: 0 0 20px #c0ffc0;
-  transition: width 0.1s linear;
+  transition: width 0.05s steps(1, end);
+  /* Steps transition for chunky, terminal-like loading */
 }
 
 .loadingText {
@@ -266,11 +267,35 @@
   padding-left: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  background: none;
+  border: none;
+  color: #c0ffc0;
+  font-family: var(--font-vt323);
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .menuItem:hover {
   text-shadow: 0 0 12px #c0ffc0;
   padding-left: 16px;
+}
+
+.menuItem:active {
+  text-shadow: 0 0 20px #c0ffc0;
+  transform: scale(0.98);
+}
+
+.menuItem.completed {
+  opacity: 0.7;
+}
+
+.menuItem.locked {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .instructionText {

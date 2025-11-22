@@ -1,0 +1,387 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 12px;
+  background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
+  font-family: var(--font-vt323);
+  color: #c0ffc0;
+}
+
+.content {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 32px;
+  color: #c0ffc0;
+  text-align: center;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.instructions {
+  font-size: 18px;
+  color: #c0ffc0;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.targetInfo {
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  padding: 16px;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.currentLocation {
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.infoRow:not(:last-child) {
+  border-bottom: 1px solid rgba(192, 255, 192, 0.2);
+}
+
+.label {
+  opacity: 0.8;
+}
+
+.value {
+  text-shadow: 0 0 8px #c0ffc0;
+  font-size: 18px;
+}
+
+.locateButton {
+  padding: 20px 32px;
+  font-size: 24px;
+  color: #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.1);
+  border: 2px solid #c0ffc0;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.3);
+  transition: all 0.2s ease;
+  min-height: 64px;
+  font-family: var(--font-vt323);
+  letter-spacing: 2px;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+}
+
+.locateButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.98);
+  box-shadow: 0 0 20px rgba(192, 255, 192, 0.5);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.loadingText {
+  font-size: 20px;
+  text-shadow: 0 0 10px #c0ffc0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.spinner {
+  width: 200px;
+  height: 24px;
+  border: 2px solid #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.spinnerBar {
+  width: 30%;
+  height: 100%;
+  background-color: #c0ffc0;
+  box-shadow: 0 0 15px #c0ffc0;
+  animation: slide 1.5s ease-in-out infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(333%);
+  }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.errorIcon {
+  font-size: 48px;
+  text-shadow: 0 0 15px #c0ffc0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.errorText {
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.retryButton {
+  padding: 16px 32px;
+  font-size: 20px;
+  color: #c0ffc0;
+  background-color: transparent;
+  border: 2px solid #c0ffc0;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  transition: all 0.2s ease;
+  min-height: 56px;
+  font-family: var(--font-vt323);
+  letter-spacing: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.retryButton:active {
+  background-color: rgba(192, 255, 192, 0.2);
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultsHeader {
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 2px;
+  padding: 12px;
+  background-color: rgba(192, 255, 192, 0.1);
+  border: 2px solid #c0ffc0;
+}
+
+.divider {
+  text-align: center;
+  opacity: 0.3;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.distanceDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.distanceLabel {
+  font-size: 18px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.distanceValue {
+  font-size: 36px;
+  text-shadow: 0 0 15px #c0ffc0;
+  letter-spacing: 2px;
+}
+
+.directionDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.directionLabel {
+  font-size: 18px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.compass {
+  width: 120px;
+  height: 120px;
+  border: 3px solid #c0ffc0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(192, 255, 192, 0.05);
+  box-shadow:
+    0 0 20px rgba(192, 255, 192, 0.3),
+    inset 0 0 20px rgba(192, 255, 192, 0.1);
+  position: relative;
+}
+
+.compass::before {
+  content: 'N';
+  position: absolute;
+  top: 8px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.compassArrow {
+  font-size: 60px;
+  text-shadow: 0 0 15px #c0ffc0;
+  transition: transform 0.5s ease;
+  line-height: 1;
+}
+
+.directionValue {
+  font-size: 28px;
+  text-shadow: 0 0 12px #c0ffc0;
+  letter-spacing: 2px;
+}
+
+.updateButton {
+  padding: 16px 32px;
+  font-size: 20px;
+  color: #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.1);
+  border: 2px solid #c0ffc0;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  transition: all 0.2s ease;
+  min-height: 56px;
+  font-family: var(--font-vt323);
+  letter-spacing: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.updateButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.footer {
+  text-align: center;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.footerText {
+  font-size: 16px;
+  opacity: 0.7;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .instructions {
+    font-size: 16px;
+  }
+
+  .infoRow {
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .value {
+    font-size: 16px;
+  }
+
+  .locateButton {
+    font-size: 20px;
+    padding: 16px 24px;
+  }
+
+  .distanceValue {
+    font-size: 28px;
+  }
+
+  .directionValue {
+    font-size: 24px;
+  }
+
+  .compass {
+    width: 100px;
+    height: 100px;
+  }
+
+  .compassArrow {
+    font-size: 50px;
+  }
+}

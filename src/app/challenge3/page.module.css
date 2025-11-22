@@ -1,0 +1,328 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px;
+  background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
+  font-family: var(--font-vt323);
+  color: #c0ffc0;
+  overflow-x: hidden;
+}
+
+.content {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 32px;
+  color: #c0ffc0;
+  text-align: center;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.instructions {
+  font-size: 18px;
+  color: #c0ffc0;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0 0 8px 0;
+}
+
+.guessHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  padding: 12px;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.guessRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background-color: rgba(192, 255, 192, 0.03);
+  border: 1px solid rgba(192, 255, 192, 0.3);
+}
+
+.codeDisplay {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.digit {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.1);
+  font-size: 24px;
+  text-shadow: 0 0 8px #c0ffc0;
+}
+
+.digit.empty {
+  opacity: 0.3;
+  text-shadow: none;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  font-size: 14px;
+}
+
+.feedbackItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedbackLabel {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.feedbackValue {
+  font-size: 20px;
+  text-shadow: 0 0 8px #c0ffc0;
+  min-width: 24px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.numberPad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  padding: 12px;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+}
+
+.numberButton {
+  background-color: transparent;
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  font-family: var(--font-vt323);
+  font-size: 24px;
+  min-height: 56px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.numberButton:active:not(:disabled) {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.95);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.numberButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.actionButton {
+  background-color: transparent;
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  font-family: var(--font-vt323);
+  font-size: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+  min-height: 56px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.actionButton:active:not(:disabled) {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.actionButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.submitButton {
+  background-color: rgba(192, 255, 192, 0.1);
+}
+
+.gameOver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 20px rgba(192, 255, 192, 0.3);
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gameOverText {
+  font-size: 36px;
+  color: #c0ffc0;
+  margin: 0;
+  text-shadow: 0 0 20px #c0ffc0;
+  animation: pulse 1.5s ease-in-out infinite;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.secretReveal {
+  font-size: 24px;
+  color: #c0ffc0;
+  text-shadow: 0 0 10px #c0ffc0;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+.resetButton {
+  padding: 16px 32px;
+  font-size: 20px;
+  color: #c0ffc0;
+  background-color: rgba(192, 255, 192, 0.1);
+  border: 2px solid #c0ffc0;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  transition: all 0.2s ease;
+  min-height: 56px;
+  font-family: var(--font-vt323);
+  letter-spacing: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.resetButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.guessCounter {
+  text-align: center;
+  font-size: 18px;
+  padding: 12px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  text-shadow: 0 0 8px #c0ffc0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 400px) {
+  .digit {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .numberButton {
+    font-size: 20px;
+    min-height: 48px;
+  }
+
+  .feedback {
+    font-size: 12px;
+  }
+
+  .feedbackLabel {
+    font-size: 12px;
+  }
+
+  .feedbackValue {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .instructions {
+    font-size: 16px;
+  }
+
+  .gameOverText {
+    font-size: 28px;
+  }
+
+  .secretReveal {
+    font-size: 20px;
+  }
+}
+
+/* Custom scrollbar for guess history */
+.guessHistory::-webkit-scrollbar {
+  width: 8px;
+}
+
+.guessHistory::-webkit-scrollbar-track {
+  background: rgba(192, 255, 192, 0.05);
+}
+
+.guessHistory::-webkit-scrollbar-thumb {
+  background: rgba(192, 255, 192, 0.3);
+  border: 1px solid #c0ffc0;
+}
+
+.guessHistory::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 255, 192, 0.5);
+}

@@ -1,26 +1,72 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { useGameStore } from "@/store/useGameStore";
 
 export default function MainPage() {
+  const router = useRouter();
+  const { isAuthenticated, challenge1Complete, challenge2Complete, challenge3Complete, allChallengesComplete } = useGameStore();
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
+  // Redirect to login if not authenticated
   useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
+    if (!isAuthenticated) {
+      router.push('/');
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    // Simulate loading progress in chunks with a stall
+    const chunkSize = 5; // Load in 5% chunks for terminal feel
+    const stallPoint = 45; // Stall around 45%
+    const normalDelay = 80; // Normal chunk delay in ms
+    const stallDelay = 800; // How long to stall in ms
+
+    let currentProgress = 0;
+    let isStalling = false;
+
+    const loadNextChunk = () => {
       setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
+        currentProgress = prev;
+
+        // If we've reached 100%, finish
+        if (currentProgress >= 100) {
           setTimeout(() => setLoading(false), 300);
           return 100;
         }
-        return prev + 5;
-      });
-    }, 50);
 
-    return () => clearInterval(interval);
+        // If we've reached the stall point and haven't stalled yet
+        if (currentProgress === stallPoint && !isStalling) {
+          isStalling = true;
+          // Wait longer before next chunk
+          setTimeout(loadNextChunk, stallDelay);
+          return prev; // Don't increment this time
+        }
+
+        // Normal progression
+        const nextProgress = Math.min(currentProgress + chunkSize, 100);
+
+        if (nextProgress < 100) {
+          setTimeout(loadNextChunk, normalDelay);
+        } else {
+          // Final chunk
+          setTimeout(loadNextChunk, normalDelay);
+        }
+
+        return nextProgress;
+      });
+    };
+
+    // Start the loading
+    setTimeout(loadNextChunk, normalDelay);
+
+    // Cleanup function (though not much to clean up with this approach)
+    return () => {
+      // Any cleanup if needed
+    };
   }, []);
 
   if (loading) {
@@ -86,7 +132,7 @@ export default function MainPage() {
             <div className={styles.descriptionText}>
               <p className={styles.welcomeText}>
                 Welcome Agent. Your mission to locate CIPHER is underway.
-                Progress: 0/5 objectives complete. Time is critical.
+                Progress: {[challenge1Complete, challenge2Complete, challenge3Complete].filter(Boolean).length}/3 objectives complete. Time is critical.
               </p>
 
               <div className={styles.dividerLine}>
@@ -96,11 +142,36 @@ export default function MainPage() {
               <p className={styles.menuHeader}>AVAILABLE MISSIONS:</p>
 
               <div className={styles.menuOptions}>
-                <p className={styles.menuItem}>{'>'} 1. DECRYPT CIPHER FILES</p>
-                <p className={styles.menuItem}>{'>'} 2. TRACE NETWORK LOGS</p>
-                <p className={styles.menuItem}>{'>'} 3. INVESTIGATE LAST LOCATION</p>
-                <p className={styles.menuItem}>{'>'} 4. ANALYZE EVIDENCE</p>
-                <p className={styles.menuItem}>{'>'} 5. FINAL CONFRONTATION</p>
+                <button
+                  className={`${styles.menuItem} ${challenge1Complete ? styles.completed : ''}`}
+                  onClick={() => router.push('/challenge1')}
+                >
+                  {'>'} 1. DECRYPT CIPHER FILES {challenge1Complete && '[✓]'}
+                </button>
+                <button
+                  className={`${styles.menuItem} ${challenge2Complete ? styles.completed : ''}`}
+                  onClick={() => router.push('/challenge2')}
+                >
+                  {'>'} 2. TRACE NETWORK LOGS {challenge2Complete && '[✓]'}
+                </button>
+                <button
+                  className={`${styles.menuItem} ${challenge3Complete ? styles.completed : ''}`}
+                  onClick={() => router.push('/challenge3')}
+                >
+                  {'>'} 3. INVESTIGATE LAST LOCATION {challenge3Complete && '[✓]'}
+                </button>
+                {allChallengesComplete() ? (
+                  <button
+                    className={styles.menuItem}
+                    onClick={() => router.push('/locator')}
+                  >
+                    {'>'} 4. LOCATE TARGET
+                  </button>
+                ) : (
+                  <p className={`${styles.menuItem} ${styles.locked}`}>
+                    {'>'} 4. [LOCKED]
+                  </p>
+                )}
               </div>
 
               <div className={styles.dividerLine}>

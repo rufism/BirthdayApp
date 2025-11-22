@@ -32,6 +32,34 @@
   gap: 16px;
   flex: 1;
   padding: 40px 0;
+  flex-direction: column;
+}
+
+.codeDisplay > div:first-child {
+  display: flex;
+  gap: 16px;
+}
+
+.codeDisplay.error .codeDigit {
+  border-color: #ff4444;
+  color: #ff4444;
+  text-shadow: 0 0 10px #ff4444;
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.errorMessage {
+  font-size: 20px;
+  color: #ff4444;
+  text-shadow: 0 0 10px #ff4444;
+  margin-top: 16px;
+  animation: pulse 0.5s ease-in-out;
+  letter-spacing: 2px;
 }
 
 .codeDigit {
