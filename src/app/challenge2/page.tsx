@@ -81,12 +81,12 @@ export default function Challenge2() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Challenge 2: Lights Out</h1>
-        <p className={styles.instructions}>
-          Turn on all the lights! Clicking a light toggles it and its neighbors.
-        </p>
+      <div className={styles.header}>
+        <h1 className={styles.title}>CHALLENGE 2: LIGHTS OUT</h1>
+        <p className={styles.subtitle}>TAP A LIGHT TO TOGGLE IT AND NEIGHBORS</p>
+      </div>
 
+      <div className={styles.activeContent}>
         <div className={styles.gridContainer}>
           {grid.map((row, rowIndex) => (
             <div key={rowIndex} className={styles.row}>
@@ -105,17 +105,14 @@ export default function Challenge2() {
         {isComplete && (
           <div className={styles.celebration}>
             <h2 className={styles.celebrationText}>You won! 🎉</h2>
-            <button className={styles.resetButton} onClick={resetGame}>
-              Play Again
-            </button>
           </div>
         )}
+      </div>
 
-        {!isComplete && (
-          <button className={styles.resetButton} onClick={resetGame}>
-            Reset
-          </button>
-        )}
+      <div className={styles.controls}>
+        <button className={styles.resetButton} onClick={resetGame}>
+          {isComplete ? 'PLAY AGAIN' : 'RESET'}
+        </button>
       </div>
     </div>
   );

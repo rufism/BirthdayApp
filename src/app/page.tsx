@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
+import KeypadButton from "@/components/KeypadButton";
 
 // Valid passcodes
 const VALID_PASSCODES = [
@@ -27,7 +28,7 @@ const VALID_PASSCODES = [
   "25649",
   "67823",
   "30587",
-  "74293"
+  "74293",
 ];
 
 export default function Home() {
@@ -53,7 +54,7 @@ export default function Home() {
       // Check if the code is valid
       if (VALID_PASSCODES.includes(code)) {
         setAuthenticated(true);
-        router.push('/main');
+        router.push("/main");
       } else {
         setError(true);
         // Clear code after a delay
@@ -67,19 +68,16 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* Logo/Image at top */}
+      {/* P.E.N.1.5 logo at top */}
       <div className={styles.logoSection}>
-        <Image
-          src="/next.svg"
-          alt="Logo"
-          width={180}
-          height={40}
-          priority
-        />
+        <p>PROTECTIVE</p>
+        <p>ELECTRONIC</p>
+        <p>NETWORK</p>
+        <p>1.5</p>
       </div>
 
       {/* Five-digit code display in center */}
-      <div className={`${styles.codeDisplay} ${error ? styles.error : ''}`}>
+      <div className={`${styles.codeDisplay} ${error ? styles.error : ""}`}>
         <div>
           {[0, 1, 2, 3, 4].map((index) => (
             <div key={index} className={styles.codeDigit}>
@@ -87,43 +85,30 @@ export default function Home() {
             </div>
           ))}
         </div>
-        {error && (
-          <div className={styles.errorMessage}>
-            INVALID PASSCODE
-          </div>
-        )}
+        {error && <div className={styles.errorMessage}>INVALID PASSCODE</div>}
       </div>
 
       {/* Keypad at bottom */}
       <div className={styles.keypad}>
         <div className={styles.keypadGrid}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-            <button
+            <KeypadButton
               key={digit}
-              className={styles.keypadButton}
+              size="large"
               onClick={() => handleKeyPress(digit.toString())}
             >
               {digit}
-            </button>
+            </KeypadButton>
           ))}
-          <button
-            className={styles.keypadButton}
-            onClick={handleClear}
-          >
+          <KeypadButton size="large" onClick={handleClear}>
             CLR
-          </button>
-          <button
-            className={styles.keypadButton}
-            onClick={() => handleKeyPress("0")}
-          >
+          </KeypadButton>
+          <KeypadButton size="large" onClick={() => handleKeyPress("0")}>
             0
-          </button>
-          <button
-            className={styles.keypadButton}
-            onClick={handleSubmit}
-          >
+          </KeypadButton>
+          <KeypadButton size="large" onClick={handleSubmit}>
             OK
-          </button>
+          </KeypadButton>
         </div>
       </div>
     </div>

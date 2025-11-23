@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import { useGameStore } from '@/store/useGameStore';
+import KeypadButton from '@/components/KeypadButton';
 
 type Guess = {
   code: number[];
@@ -117,15 +118,14 @@ export default function Challenge3() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Challenge 3: Mastermind</h1>
-        <p className={styles.instructions}>
-          Crack the 4-digit code! You have 10 attempts.
-        </p>
+      <div className={styles.header}>
+        <h1 className={styles.title}>CHALLENGE 3: MASTERMIND</h1>
+        <p className={styles.subtitle}>CRACK THE 4-DIGIT CODE! 10 ATTEMPTS</p>
+      </div>
 
-        {/* Previous guesses */}
-        <div className={styles.guessHistory}>
-          {Array.from({ length: 10 }).map((_, index) => {
+      {/* Previous guesses */}
+      <div className={styles.guessHistory}>
+        {Array.from({ length: 10 }).map((_, index) => {
             const guess = guesses[index];
             const isCurrent = index === guesses.length && !isComplete;
 
@@ -178,59 +178,56 @@ export default function Challenge3() {
         </div>
 
         {/* Number pad */}
-        {!isComplete && (
-          <div className={styles.controls}>
-            <div className={styles.numberPad}>
-              {Array.from({ length: 10 }).map((_, i) => (
+        <div className={styles.controls}>
+          {!isComplete && (
+            <>
+              <div className={styles.numberPad}>
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <KeypadButton
+                    key={i}
+                    size="medium"
+                    onClick={() => addDigit(i)}
+                    disabled={currentGuess.length >= 4}
+                  >
+                    {i}
+                  </KeypadButton>
+                ))}
+              </div>
+
+              <div className={styles.actionButtons}>
                 <button
-                  key={i}
-                  className={styles.numberButton}
-                  onClick={() => addDigit(i)}
-                  disabled={currentGuess.length >= 4}
+                  className={styles.actionButton}
+                  onClick={removeDigit}
+                  disabled={currentGuess.length === 0}
                 >
-                  {i}
+                  DELETE
                 </button>
-              ))}
-            </div>
+                <button
+                  className={`${styles.actionButton} ${styles.submitButton}`}
+                  onClick={submitGuess}
+                  disabled={currentGuess.length !== 4}
+                >
+                  SUBMIT
+                </button>
+              </div>
+            </>
+          )}
 
-            <div className={styles.actionButtons}>
-              <button
-                className={styles.actionButton}
-                onClick={removeDigit}
-                disabled={currentGuess.length === 0}
-              >
-                Delete
+          {/* Game over */}
+          {isComplete && (
+            <div className={styles.gameOver}>
+              <h2 className={styles.gameOverText}>
+                {hasWon ? 'Code Cracked! 🎉' : 'Mission Failed!'}
+              </h2>
+              <p className={styles.secretReveal}>
+                The code was: {secretCode.join(' ')}
+              </p>
+              <button className={styles.resetButton} onClick={generateSecretCode}>
+                NEW GAME
               </button>
-              <button
-                className={`${styles.actionButton} ${styles.submitButton}`}
-                onClick={submitGuess}
-                disabled={currentGuess.length !== 4}
-              >
-                Submit
-              </button>
             </div>
-          </div>
-        )}
-
-        {/* Game over */}
-        {isComplete && (
-          <div className={styles.gameOver}>
-            <h2 className={styles.gameOverText}>
-              {hasWon ? 'Code Cracked! 🎉' : 'Mission Failed!'}
-            </h2>
-            <p className={styles.secretReveal}>
-              The code was: {secretCode.join(' ')}
-            </p>
-            <button className={styles.resetButton} onClick={generateSecretCode}>
-              New Game
-            </button>
-          </div>
-        )}
-
-        <div className={styles.guessCounter}>
-          Attempts: {guesses.length} / 10
+          )}
         </div>
-      </div>
     </div>
   );
 }

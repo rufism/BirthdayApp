@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
+import KeypadButton from "@/components/KeypadButton";
 
 // The cipher message - you can customize this
 const CIPHER_MESSAGE = "KHOOR DJHQW, BRX KDYH IRXQG WKH ILUVW FKDOOHQJH";
@@ -118,41 +119,46 @@ export default function Challenge1() {
         <p className={styles.subtitle}>TAP CIPHER LETTER, THEN TAP DECODE</p>
       </div>
 
-      <div className={styles.cipherDisplay}>
-        {renderCipherMessage()}
-      </div>
-
-      {selectedCipherLetter && (
-        <div className={styles.selectionIndicator}>
-          DECODING: <span className={styles.highlightLetter}>{selectedCipherLetter}</span>
+      <div className={styles.activeContent}>
+        <div className={styles.cipherDisplay}>
+          {renderCipherMessage()}
         </div>
-      )}
 
-      <div className={styles.alphabetGrid}>
-        {alphabet.map(letter => {
-          // Check if this letter is already used
-          const isUsed = Object.values(substitutions).includes(letter);
-
-          return (
-            <button
-              key={letter}
-              className={`${styles.alphabetButton} ${isUsed ? styles.used : ''}`}
-              onClick={() => handleAlphabetClick(letter)}
-              disabled={!selectedCipherLetter}
-            >
-              {letter}
-            </button>
-          );
-        })}
+        {selectedCipherLetter && (
+          <div className={styles.selectionIndicator}>
+            DECODING: <span className={styles.highlightLetter}>{selectedCipherLetter}</span>
+          </div>
+        )}
       </div>
 
       <div className={styles.controls}>
-        <button className={styles.controlButton} onClick={handleClear}>
-          CLEAR
-        </button>
-        <button className={styles.controlButton} onClick={handleSubmit}>
-          SUBMIT
-        </button>
+        <div className={styles.alphabetGrid}>
+          {alphabet.map(letter => {
+            // Check if this letter is already used
+            const isUsed = Object.values(substitutions).includes(letter);
+
+            return (
+              <KeypadButton
+                key={letter}
+                size="small"
+                onClick={() => handleAlphabetClick(letter)}
+                disabled={!selectedCipherLetter}
+                used={isUsed}
+              >
+                {letter}
+              </KeypadButton>
+            );
+          })}
+        </div>
+
+        <div className={styles.actionButtons}>
+          <button className={styles.controlButton} onClick={handleClear}>
+            CLEAR
+          </button>
+          <button className={styles.controlButton} onClick={handleSubmit}>
+            SUBMIT
+          </button>
+        </div>
       </div>
     </div>
   );

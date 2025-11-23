@@ -35,6 +35,25 @@ a {
   text-decoration: none;
 }
 
+/* Custom scrollbar styling for phosphor theme */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(192, 255, 192, 0.05);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(192, 255, 192, 0.3);
+  border: 1px solid #c0ffc0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 255, 192, 0.5);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

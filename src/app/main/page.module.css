@@ -11,7 +11,7 @@
       transparent 4px
     ),
     radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
-  padding: 12px 8px;
+  padding: 8px;
   font-family: var(--font-vt323);
   color: #c0ffc0;
 }
@@ -116,15 +116,10 @@
 .headerBox {
   grid-column: span 2;
   grid-row: 1;
-  border: 2px solid #c0ffc0;
-  border-radius: 0;
-  background-color: rgba(192, 255, 192, 0.05);
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 8px 4px;
+  padding: 8px 8px;
   min-height: 0;
 }
 
@@ -132,7 +127,6 @@
   font-size: 18px;
   text-shadow: 0 0 10px #c0ffc0;
   line-height: 1.4;
-  text-align: center;
 }
 
 @media (max-width: 500px) {
@@ -151,8 +145,7 @@
   box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 4px;
+  padding: 8px 8px;
   min-height: 0;
 }
 
@@ -180,13 +173,13 @@
   align-items: center;
   justify-content: center;
   min-height: 200px;
+  padding: 8px;
 }
 
-.photoPlaceholder {
-  text-align: center;
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: 0.7;
+.photo {
+  width: 100%;
+  height: auto;
+  max-width: 150px;
 }
 
 /* Info Box - Takes up 1 row */
@@ -198,14 +191,13 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-height: 200px;
+  gap: 4px;
 }
 
 .infoLabel {
   font-size: 12px;
   opacity: 0.7;
-  margin-bottom: 4px;
 }
 
 .infoValue {
@@ -230,6 +222,23 @@
   overflow-y: auto;
 }
 
+.descriptionBox::-webkit-scrollbar {
+  width: 8px;
+}
+
+.descriptionBox::-webkit-scrollbar-track {
+  background: rgba(192, 255, 192, 0.05);
+}
+
+.descriptionBox::-webkit-scrollbar-thumb {
+  background: rgba(192, 255, 192, 0.3);
+  border: 1px solid #c0ffc0;
+}
+
+.descriptionBox::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 255, 192, 0.5);
+}
+
 .descriptionText {
   text-align: left;
   align-self: flex-start;
@@ -249,7 +258,6 @@
 
 .menuHeader {
   font-size: 18px;
-  margin-bottom: 12px;
   text-shadow: 0 0 10px #c0ffc0;
   font-weight: bold;
 }
@@ -257,8 +265,6 @@
 .menuOptions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 12px;
 }
 
 .menuItem {
@@ -328,10 +334,9 @@
   grid-column: span 2;
   grid-row: 5;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px 0;
-  min-height: 0;
 }
 
 .footerText {
@@ -403,8 +408,8 @@
     font-size: 16px;
   }
 
-  .photoPlaceholder {
-    font-size: 14px;
+  .photo {
+    max-width: 130px;
   }
 
   .missionHeader {

@@ -1,10 +1,8 @@
 .container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  min-height: 100vh;
+  height: 100vh;
   background: repeating-linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.15) 0px,
@@ -13,41 +11,58 @@
       transparent 4px
     ),
     radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
-  font-family: var(--font-vt323);
   color: #c0ffc0;
-}
-
-.content {
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
+  font-family: var(--font-vt323);
+  padding: 8px;
+  gap: 8px;
 }
 
 .title {
-  font-size: 32px;
-  color: #c0ffc0;
-  margin-bottom: 16px;
-  text-shadow: 0 0 10px #c0ffc0;
+  font-size: 24px;
+  margin: 0 0 8px 0;
   letter-spacing: 2px;
+  text-shadow: 0 0 10px #c0ffc0;
 }
 
-.instructions {
-  font-size: 18px;
-  color: #c0ffc0;
-  margin-bottom: 32px;
-  line-height: 1.6;
-  padding: 0 10px;
-  opacity: 0.9;
+.subtitle {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.activeContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.activeContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.activeContent::-webkit-scrollbar-track {
+  background: rgba(192, 255, 192, 0.05);
+}
+
+.activeContent::-webkit-scrollbar-thumb {
+  background: rgba(192, 255, 192, 0.3);
+  border: 1px solid #c0ffc0;
+}
+
+.activeContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 255, 192, 0.5);
 }
 
 .gridContainer {
   display: inline-block;
-  background-color: rgba(192, 255, 192, 0.05);
-  padding: 16px;
-  border-radius: 0;
-  border: 2px solid #c0ffc0;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
-  margin-bottom: 32px;
 }
 
 .row {
@@ -87,15 +102,12 @@
 
 .on {
   background-color: #c0ffc0;
-  box-shadow:
-    0 0 20px rgba(192, 255, 192, 0.6),
-    0 0 30px rgba(192, 255, 192, 0.4),
-    inset 0 0 15px rgba(192, 255, 192, 0.5);
+  box-shadow: 0 0 20px rgba(192, 255, 192, 0.6),
+    0 0 30px rgba(192, 255, 192, 0.4), inset 0 0 15px rgba(192, 255, 192, 0.5);
   border-color: #c0ffc0;
 }
 
 .celebration {
-  margin-bottom: 24px;
   animation: slideIn 0.5s ease-out;
 }
 
@@ -113,14 +125,16 @@
 .celebrationText {
   font-size: 36px;
   color: #c0ffc0;
-  margin-bottom: 16px;
+  margin: 0;
   text-shadow: 0 0 20px #c0ffc0;
   animation: pulse 1s ease-in-out infinite;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -128,26 +142,31 @@
   }
 }
 
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .resetButton {
-  padding: 16px 32px;
-  font-size: 20px;
-  color: #c0ffc0;
   background-color: transparent;
+  color: #c0ffc0;
   border: 2px solid #c0ffc0;
-  border-radius: 0;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
-  transition: all 0.2s ease;
-  /* Touch-friendly button size */
-  min-height: 48px;
-  min-width: 120px;
-  -webkit-tap-highlight-color: transparent;
   font-family: var(--font-vt323);
+  font-size: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
   letter-spacing: 1px;
+  min-height: 56px;
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  background-color: rgba(192, 255, 192, 0.1);
 }
 
 .resetButton:active {
-  background-color: rgba(192, 255, 192, 0.2);
+  background-color: rgba(192, 255, 192, 0.3);
   transform: scale(0.98);
   box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
 }

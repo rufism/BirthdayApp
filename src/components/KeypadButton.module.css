@@ -1,0 +1,121 @@
+.keypadButton {
+  background-color: transparent;
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  font-family: var(--font-vt323);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  border-radius: 0;
+  padding: 0;
+}
+
+.keypadButton:active:not(:disabled) {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.95);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.keypadButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Selected state (for cipher game) */
+.keypadButton.selected {
+  background-color: #c0ffc0;
+  color: #0a0e1a;
+  box-shadow: 0 0 10px #c0ffc0;
+}
+
+/* Used state (for cipher game - already assigned letters) */
+.keypadButton.used {
+  background-color: rgba(0, 204, 255, 0.2);
+  border-color: #00ccff;
+  color: #00ccff;
+}
+
+/* Size variants */
+
+/* Small: 7 buttons fit horizontally (with gaps) */
+/* ~calc((100vw - padding - gaps) / 7) */
+.keypadButton.small {
+  width: calc((100vw - 48px - 36px) / 7); /* Account for container padding and gaps */
+  min-width: 40px;
+  max-width: 48px;
+  height: 44px;
+  min-height: 44px; /* Accessibility minimum */
+  font-size: 18px;
+}
+
+/* Medium: 5 buttons fit horizontally */
+.keypadButton.medium {
+  width: calc((100vw - 48px - 32px) / 5);
+  min-width: 56px;
+  max-width: 72px;
+  height: 56px;
+  min-height: 56px;
+  font-size: 22px;
+}
+
+/* Large: 3 buttons fit horizontally */
+.keypadButton.large {
+  width: calc((100vw - 48px - 24px) / 3);
+  min-width: 88px;
+  max-width: 120px;
+  height: 64px;
+  min-height: 64px;
+  font-size: 24px;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 500px) {
+  .keypadButton.small {
+    width: 48px;
+  }
+
+  .keypadButton.medium {
+    width: 72px;
+  }
+
+  .keypadButton.large {
+    width: 120px;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 375px) {
+  .keypadButton.small {
+    width: calc((100vw - 32px - 30px) / 7);
+    min-width: 38px;
+    max-width: 44px;
+    height: 42px;
+    min-height: 42px;
+    font-size: 16px;
+  }
+
+  .keypadButton.medium {
+    width: calc((100vw - 32px - 28px) / 5);
+    min-width: 52px;
+    max-width: 64px;
+    height: 52px;
+    min-height: 52px;
+    font-size: 20px;
+  }
+
+  .keypadButton.large {
+    width: calc((100vw - 32px - 20px) / 3);
+    min-width: 80px;
+    max-width: 100px;
+    height: 58px;
+    min-height: 58px;
+    font-size: 22px;
+  }
+}

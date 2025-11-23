@@ -2,19 +2,69 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
 
 export default function MainPage() {
   const router = useRouter();
-  const { isAuthenticated, challenge1Complete, challenge2Complete, challenge3Complete, allChallengesComplete } = useGameStore();
+  const {
+    isAuthenticated,
+    challenge1Complete,
+    challenge2Complete,
+    challenge3Complete,
+    allChallengesComplete,
+  } = useGameStore();
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [timeSinceLogin, setTimeSinceLogin] = useState("");
+
+  // Calculate countdown to December 19, 2025 at 8:30 PM
+  useEffect(() => {
+    const calculateCountdown = () => {
+      const targetDate = new Date("2025-12-19T20:30:00");
+      const now = new Date();
+      const diffMs = targetDate.getTime() - now.getTime();
+
+      if (diffMs <= 0) {
+        setTimeSinceLogin("TIME EXPIRED");
+        return;
+      }
+
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+      if (days > 0) {
+        setTimeSinceLogin(
+          `${days} DAY${days !== 1 ? "S" : ""} ${hours} HR${
+            hours !== 1 ? "S" : ""
+          } ${minutes} MIN`
+        );
+      } else if (hours > 0) {
+        setTimeSinceLogin(
+          `${hours} HR${hours !== 1 ? "S" : ""} ${minutes} MIN ${seconds} SEC`
+        );
+      } else if (minutes > 0) {
+        setTimeSinceLogin(`${minutes} MIN ${seconds} SEC`);
+      } else {
+        setTimeSinceLogin(`${seconds} SEC`);
+      }
+    };
+
+    calculateCountdown();
+    const interval = setInterval(calculateCountdown, 1000); // Update every second
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/');
+      router.push("/");
     }
   }, [isAuthenticated, router]);
 
@@ -100,94 +150,113 @@ export default function MainPage() {
         <div className={styles.scannerGrid}>
           {/* Header status information - full top */}
           <div className={styles.headerBox}>
-            <p className={styles.headerText}>SECURE CONNECTION ESTABLISHED</p>
-            <p className={styles.headerText}>STATUS: ONLINE</p>
+            <p className={styles.headerText}>
+              PROTECTIVE ELECTRONIC NETWORK 1.5 [P.E.N.1.5]
+            </p>
+            <p className={styles.headerText}>
+              CONNECTION SECURELY ENCRYPTION WRAPPED
+            </p>
           </div>
 
           {/* Agent info - full */}
           <div className={styles.agentInfoBox}>
             <p className={styles.agentInfoText}>
-              AGENT: JOHN DOE | RANK: OPERATIVE | DIVISION: CYBER OPS
+              OPERATION &quot;MID-LIFE CRISIS&quot;
             </p>
           </div>
 
-          {/* Photo placeholder - mid left */}
+          {/* Photo - mid left */}
           <div className={styles.photoBox}>
-            <div className={styles.photoPlaceholder}>
-              <p>[PHOTO]</p>
-              <p>ID SCAN</p>
-            </div>
+            <Image
+              src="/seth_dithered_phosphor.png"
+              alt="Agent ID Photo"
+              width={150}
+              height={150}
+              className={styles.photo}
+            />
           </div>
 
           {/* Agent Details - mid right */}
           <div className={styles.infoBox}>
-            <p className={styles.infoLabel}>ID:</p>
-            <p className={styles.infoValue}>
-              A-{Math.floor(Math.random() * 9000) + 1000}
-            </p>
+            <p className={styles.infoLabel}>TARGET:</p>
+            <p className={styles.infoValue}>SETHOLEMEW RUF</p>
+
+            <p className={styles.infoLabel}>CODE NAME:</p>
+            <p className={styles.infoValue}>THE MOUNTAIN</p>
+
+            <p className={styles.infoLabel}>AGE:</p>
+            <p className={styles.infoValue}>34</p>
+
+            <p className={styles.infoLabel}>FOND OF:</p>
+            <p className={styles.infoValue}>TULIPS/WALKS ON BEACH</p>
           </div>
 
           {/* Description - full */}
           <div className={styles.descriptionBox}>
             <div className={styles.descriptionText}>
               <p className={styles.welcomeText}>
-                Welcome Agent. Your mission to locate CIPHER is underway.
-                Progress: {[challenge1Complete, challenge2Complete, challenge3Complete].filter(Boolean).length}/3 objectives complete. Time is critical.
+                Welcome Agent. Your mission to locate CIPHER is underway. Time
+                is critical. We only get one shot at this. Good luck.
               </p>
 
-              <div className={styles.dividerLine}>
-                <p>────────────────────────────</p>
-              </div>
-
-              <p className={styles.menuHeader}>AVAILABLE MISSIONS:</p>
+              <p className={styles.menuHeader}>SELECT MISSION:</p>
 
               <div className={styles.menuOptions}>
                 <button
-                  className={`${styles.menuItem} ${challenge1Complete ? styles.completed : ''}`}
-                  onClick={() => router.push('/challenge1')}
+                  className={`${styles.menuItem} ${
+                    challenge1Complete ? styles.completed : ""
+                  }`}
+                  onClick={() => router.push("/challenge1")}
                 >
-                  {'>'} 1. DECRYPT CIPHER FILES {challenge1Complete && '[✓]'}
+                  1. DECRYPT CIPHER FILES {challenge1Complete && "[✓]"}
                 </button>
                 <button
-                  className={`${styles.menuItem} ${challenge2Complete ? styles.completed : ''}`}
-                  onClick={() => router.push('/challenge2')}
+                  className={`${styles.menuItem} ${
+                    challenge2Complete ? styles.completed : ""
+                  }`}
+                  onClick={() => router.push("/challenge2")}
                 >
-                  {'>'} 2. TRACE NETWORK LOGS {challenge2Complete && '[✓]'}
+                  2. TRACE NETWORK LOGS {challenge2Complete && "[✓]"}
                 </button>
                 <button
-                  className={`${styles.menuItem} ${challenge3Complete ? styles.completed : ''}`}
-                  onClick={() => router.push('/challenge3')}
+                  className={`${styles.menuItem} ${
+                    challenge3Complete ? styles.completed : ""
+                  }`}
+                  onClick={() => router.push("/challenge3")}
                 >
-                  {'>'} 3. INVESTIGATE LAST LOCATION {challenge3Complete && '[✓]'}
+                  3. INVESTIGATE LAST LOCATION {challenge3Complete && "[✓]"}
                 </button>
                 {allChallengesComplete() ? (
                   <button
                     className={styles.menuItem}
-                    onClick={() => router.push('/locator')}
+                    onClick={() => router.push("/locator")}
                   >
-                    {'>'} 4. LOCATE TARGET
+                    4. LOCATE TARGET
                   </button>
                 ) : (
                   <p className={`${styles.menuItem} ${styles.locked}`}>
-                    {'>'} 4. [LOCKED]
+                    4. [LOCKED]
                   </p>
                 )}
               </div>
-
-              <div className={styles.dividerLine}>
-                <p>────────────────────────────</p>
-              </div>
-
-              <p className={styles.instructionText}>
-                Select mission to proceed...
-              </p>
             </div>
           </div>
 
           {/* Footer - bottom full */}
           <div className={styles.footerBox}>
             <p className={styles.footerText}>
-              LAST LOGIN: 2024-06-15 14:32:10 | MISSIONS COMPLETED: 27
+              TIME REMAINING: {timeSinceLogin || "CALCULATING..."}
+            </p>
+            <p className={styles.footerText}>
+              MISSIONS COMPLETED:{" "}
+              {
+                [
+                  challenge1Complete,
+                  challenge2Complete,
+                  challenge3Complete,
+                ].filter(Boolean).length
+              }
+              /3
             </p>
           </div>
         </div>

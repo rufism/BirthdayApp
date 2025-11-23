@@ -4,8 +4,7 @@
   justify-content: space-between;
   min-height: 100vh;
   min-height: 100svh;
-  background:
-    repeating-linear-gradient(
+  background: repeating-linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.15) 0px,
       rgba(0, 0, 0, 0.15) 2px,
@@ -19,10 +18,19 @@
 
 .logoSection {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 20px;
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(70deg) brightness(0.8);
+  gap: 4px;
+}
+
+.logoSection p {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 2px;
 }
 
 .codeDisplay {
@@ -48,9 +56,16 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 .errorMessage {
@@ -111,7 +126,8 @@
 
 .keypadButton:active {
   background-color: rgba(192, 255, 192, 0.3);
-  box-shadow: 0 0 25px rgba(192, 255, 192, 0.5), inset 0 0 15px rgba(192, 255, 192, 0.3);
+  box-shadow: 0 0 25px rgba(192, 255, 192, 0.5),
+    inset 0 0 15px rgba(192, 255, 192, 0.3);
   transform: scale(0.98);
 }
 
