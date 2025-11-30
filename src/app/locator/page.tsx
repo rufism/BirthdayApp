@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './page.module.css';
-import { useGameStore } from '@/store/useGameStore';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
+import { useGameStore } from "@/store/useGameStore";
 
 const TARGET_LAT = 49.89807685939328;
 const TARGET_LON = -97.13486238510536;
@@ -21,25 +21,25 @@ export default function Locator() {
   const { isAuthenticated, allChallengesComplete } = useGameStore();
 
   const [locationData, setLocationData] = useState<LocationData | null>(null);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false);
 
   // Redirect to login if not authenticated or challenges not complete
   useEffect(() => {
     if (!isAuthenticated || !allChallengesComplete()) {
-      router.push('/');
+      router.push("/");
     }
   }, [isAuthenticated, allChallengesComplete, router]);
 
   const requestLocation = () => {
     if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your device');
+      setError("Geolocation is not supported by your device");
       return;
     }
 
     setLoading(true);
-    setError('');
+    setError("");
     setPermissionDenied(false);
 
     navigator.geolocation.getCurrentPosition(
@@ -53,19 +53,21 @@ export default function Locator() {
         setLoading(false);
         if (err.code === 1) {
           setPermissionDenied(true);
-          setError('Location permission denied. Please enable location access.');
+          setError(
+            "Location permission denied. Please enable location access."
+          );
         } else if (err.code === 2) {
-          setError('Location unavailable. Please check your device settings.');
+          setError("Location unavailable. Please check your device settings.");
         } else if (err.code === 3) {
-          setError('Location request timed out. Please try again.');
+          setError("Location request timed out. Please try again.");
         } else {
-          setError('Unable to retrieve location.');
+          setError("Unable to retrieve location.");
         }
       },
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 0
+        maximumAge: 0,
       }
     );
   };
@@ -83,11 +85,16 @@ export default function Locator() {
       longitude: lon,
       distance,
       direction,
-      compassDegrees: bearing
+      compassDegrees: bearing,
     };
   };
 
-  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number => {
     const R = 6371; // Radius of Earth in kilometers
     const dLat = toRadians(lat2 - lat1);
     const dLon = toRadians(lon2 - lon1);
@@ -95,9 +102,9 @@ export default function Locator() {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(toRadians(lat1)) *
-      Math.cos(toRadians(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+        Math.cos(toRadians(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c;
@@ -105,7 +112,12 @@ export default function Locator() {
     return distance;
   };
 
-  const calculateBearing = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const calculateBearing = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): number => {
     const dLon = toRadians(lon2 - lon1);
     const y = Math.sin(dLon) * Math.cos(toRadians(lat2));
     const x =
@@ -120,10 +132,22 @@ export default function Locator() {
 
   const getDirectionFromBearing = (bearing: number): string => {
     const directions = [
-      'N', 'NNE', 'NE', 'ENE',
-      'E', 'ESE', 'SE', 'SSE',
-      'S', 'SSW', 'SW', 'WSW',
-      'W', 'WNW', 'NW', 'NNW'
+      "N",
+      "NNE",
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE",
+      "SSE",
+      "S",
+      "SSW",
+      "SW",
+      "WSW",
+      "W",
+      "WNW",
+      "NW",
+      "NNW",
     ];
 
     const index = Math.round(bearing / 22.5) % 16;
@@ -150,22 +174,29 @@ export default function Locator() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Target Locator</h1>
-        <p className={styles.instructions}>
-          Determine your distance and direction from the target coordinates.
-        </p>
-
-
-        {!locationData && !loading && (
-          <button className={styles.locateButton} onClick={requestLocation}>
-            {permissionDenied ? 'Retry Location Request' : 'Get My Location'}
+      <div className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>TARGET LOCATOR</h1>
+          <button className={styles.backButton} onClick={() => router.back()}>
+            ←
           </button>
+        </div>
+        <p className={styles.subtitle}>DETERMINE DISTANCE AND DIRECTION</p>
+      </div>
+
+      <div className={styles.activeContent}>
+        {!locationData && !loading && !error && (
+          <div className={styles.instructions}>
+            <p className={styles.instructionText}>
+              Enable location services to track distance and bearing to target
+              coordinates.
+            </p>
+          </div>
         )}
 
         {loading && (
           <div className={styles.loading}>
-            <div className={styles.loadingText}>Acquiring coordinates...</div>
+            <div className={styles.loadingText}>ACQUIRING COORDINATES...</div>
             <div className={styles.spinner}>
               <div className={styles.spinnerBar}></div>
             </div>
@@ -176,42 +207,28 @@ export default function Locator() {
           <div className={styles.error}>
             <div className={styles.errorIcon}>⚠</div>
             <div className={styles.errorText}>{error}</div>
-            <button className={styles.retryButton} onClick={requestLocation}>
-              Try Again
-            </button>
           </div>
         )}
 
         {locationData && !loading && (
           <div className={styles.results}>
-            <div className={styles.resultsHeader}>Location Acquired</div>
-
-            <div className={styles.currentLocation}>
-              <div className={styles.infoRow}>
-                <span className={styles.label}>Your Latitude:</span>
-                <span className={styles.value}>{locationData.latitude.toFixed(6)}</span>
-              </div>
-              <div className={styles.infoRow}>
-                <span className={styles.label}>Your Longitude:</span>
-                <span className={styles.value}>{locationData.longitude.toFixed(6)}</span>
-              </div>
-            </div>
-
-            <div className={styles.divider}>{'═'.repeat(30)}</div>
+            <div className={styles.resultsHeader}>LOCATION ACQUIRED</div>
 
             <div className={styles.distanceDisplay}>
-              <div className={styles.distanceLabel}>Distance to Target</div>
+              <div className={styles.distanceLabel}>DISTANCE TO TARGET</div>
               <div className={styles.distanceValue}>
                 {formatDistance(locationData.distance)}
               </div>
             </div>
 
             <div className={styles.directionDisplay}>
-              <div className={styles.directionLabel}>Direction</div>
+              <div className={styles.directionLabel}>BEARING</div>
               <div className={styles.compass}>
                 <div
                   className={styles.compassArrow}
-                  style={{ transform: `rotate(${locationData.compassDegrees}deg)` }}
+                  style={{
+                    transform: `rotate(${locationData.compassDegrees}deg)`,
+                  }}
                 >
                   ↑
                 </div>
@@ -219,19 +236,32 @@ export default function Locator() {
               <div className={styles.directionValue}>
                 {locationData.direction}
               </div>
+              <div className={styles.directionDegrees}>
+                {Math.round(locationData.compassDegrees)}°
+              </div>
             </div>
-
-            <button className={styles.updateButton} onClick={requestLocation}>
-              Update Location
-            </button>
           </div>
         )}
+      </div>
 
-        <div className={styles.footer}>
-          <div className={styles.footerText}>
-            Location services must be enabled
-          </div>
-        </div>
+      <div className={styles.controls}>
+        {!locationData && !loading && (
+          <button className={styles.controlButton} onClick={requestLocation}>
+            {permissionDenied ? "RETRY REQUEST" : "ACTIVATE LOCATOR"}
+          </button>
+        )}
+
+        {error && (
+          <button className={styles.controlButton} onClick={requestLocation}>
+            TRY AGAIN
+          </button>
+        )}
+
+        {locationData && !loading && (
+          <button className={styles.controlButton} onClick={requestLocation}>
+            UPDATE LOCATION
+          </button>
+        )}
       </div>
     </div>
   );

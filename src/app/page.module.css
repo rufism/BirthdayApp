@@ -12,17 +12,8 @@
       transparent 4px
     ),
     radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
-  padding: 32px 20px;
+  padding: 8px 8px;
   font-family: var(--font-vt323);
-}
-
-.logoSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  gap: 4px;
 }
 
 .logoSection p {
@@ -31,21 +22,31 @@
   margin: 0;
   text-shadow: 0 0 10px #c0ffc0;
   letter-spacing: 2px;
+  text-align: center;
+}
+
+.logoSection pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 8px;
+  line-height: 1;
+  margin: 0;
+  color: #c0ffc0;
+  text-shadow: 0 0 10px #c0ffc0;
+  text-align: left;
+  white-space: pre;
+  font-weight: bold;
+  padding: 0;
 }
 
 .codeDisplay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
   flex: 1;
   padding: 40px 0;
   flex-direction: column;
 }
 
-.codeDisplay > div:first-child {
+.codeDigits {
   display: flex;
-  gap: 16px;
+  justify-content: space-around;
 }
 
 .codeDisplay.error .codeDigit {
@@ -86,8 +87,7 @@
   font-size: 36px;
   font-weight: 700;
   color: #c0ffc0;
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
+
   border-radius: 0;
   text-shadow: 0 0 10px #c0ffc0;
   font-family: var(--font-vt323);
@@ -95,14 +95,13 @@
 }
 
 .keypad {
-  padding-bottom: 20px;
+  padding-bottom: 8px;
 }
 
 .keypadGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  max-width: 320px;
   margin: 0 auto;
 }
 
@@ -129,18 +128,4 @@
   box-shadow: 0 0 25px rgba(192, 255, 192, 0.5),
     inset 0 0 15px rgba(192, 255, 192, 0.3);
   transform: scale(0.98);
-}
-
-/* Ensure minimum tap target size for mobile */
-@media (max-width: 400px) {
-  .keypadButton {
-    height: 58px;
-    font-size: 22px;
-  }
-
-  .codeDigit {
-    width: 42px;
-    height: 58px;
-    font-size: 32px;
-  }
 }

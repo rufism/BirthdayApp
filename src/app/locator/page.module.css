@@ -1,9 +1,8 @@
 .container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px 12px;
+  min-height: 100vh;
+  height: 100vh;
   background: repeating-linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.15) 0px,
@@ -12,92 +11,142 @@
       transparent 4px
     ),
     radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
-  font-family: var(--font-vt323);
   color: #c0ffc0;
+  font-family: var(--font-vt323);
+  padding: 8px;
+  gap: 8px;
 }
 
-.content {
-  width: 100%;
-  max-width: 500px;
+.header {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .title {
-  font-size: 32px;
-  color: #c0ffc0;
-  text-align: center;
-  text-shadow: 0 0 10px #c0ffc0;
+  font-size: 24px;
+  margin: 0 0 8px 0;
   letter-spacing: 2px;
+  text-shadow: 0 0 10px #c0ffc0;
+  flex: 1;
+}
+
+.backButton {
+  background-color: transparent;
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  font-family: var(--font-vt323);
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.backButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.95);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.subtitle {
+  font-size: 14px;
   margin: 0;
+  opacity: 0.8;
+}
+
+.activeContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: rgba(192, 255, 192, 0.05);
+  border: 2px solid #c0ffc0;
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.activeContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.activeContent::-webkit-scrollbar-track {
+  background: rgba(192, 255, 192, 0.05);
+}
+
+.activeContent::-webkit-scrollbar-thumb {
+  background: rgba(192, 255, 192, 0.3);
+  border: 1px solid #c0ffc0;
+}
+
+.activeContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 255, 192, 0.5);
 }
 
 .instructions {
-  font-size: 18px;
-  color: #c0ffc0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  max-width: 400px;
+}
+
+.instructionText {
+  font-size: 18px;
   line-height: 1.6;
   opacity: 0.9;
   margin: 0;
 }
 
-.targetInfo {
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  padding: 16px;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
-}
-
-.currentLocation {
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
-}
-
-.infoRow {
+.controls {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  font-size: 16px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.infoRow:not(:last-child) {
-  border-bottom: 1px solid rgba(192, 255, 192, 0.2);
-}
-
-.label {
-  opacity: 0.8;
-}
-
-.value {
-  text-shadow: 0 0 8px #c0ffc0;
-  font-size: 18px;
-}
-
-.locateButton {
-  padding: 20px 32px;
-  font-size: 24px;
+.controlButton {
+  background-color: transparent;
   color: #c0ffc0;
-  background-color: rgba(192, 255, 192, 0.1);
   border: 2px solid #c0ffc0;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.3);
-  transition: all 0.2s ease;
-  min-height: 64px;
   font-family: var(--font-vt323);
-  letter-spacing: 2px;
+  font-size: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+  min-height: 56px;
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
   -webkit-tap-highlight-color: transparent;
-  width: 100%;
 }
 
-.locateButton:active {
+.controlButton:active {
   background-color: rgba(192, 255, 192, 0.3);
   transform: scale(0.98);
-  box-shadow: 0 0 20px rgba(192, 255, 192, 0.5);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
+}
+
+.controlButton:first-child {
+  background-color: rgba(192, 255, 192, 0.1);
 }
 
 .loading {
@@ -106,19 +155,20 @@
   align-items: center;
   gap: 20px;
   padding: 32px;
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  width: 100%;
+  max-width: 400px;
 }
 
 .loadingText {
   font-size: 20px;
   text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 1px;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -158,49 +208,39 @@
   align-items: center;
   gap: 16px;
   padding: 24px;
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
 .errorIcon {
   font-size: 48px;
-  text-shadow: 0 0 15px #c0ffc0;
+  color: #ff4444;
+  text-shadow: 0 0 15px #ff4444;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 .errorText {
   font-size: 18px;
-  text-align: center;
   line-height: 1.6;
   opacity: 0.9;
-}
-
-.retryButton {
-  padding: 16px 32px;
-  font-size: 20px;
-  color: #c0ffc0;
-  background-color: transparent;
-  border: 2px solid #c0ffc0;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
-  transition: all 0.2s ease;
-  min-height: 56px;
-  font-family: var(--font-vt323);
-  letter-spacing: 1px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.retryButton:active {
-  background-color: rgba(192, 255, 192, 0.2);
-  transform: scale(0.98);
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
 }
 
 .results {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.resultsHeader {
+  font-size: 20px;
+  text-align: center;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 2px;
+  padding: 12px;
+  opacity: 0.9;
   animation: slideIn 0.5s ease-out;
 }
 
@@ -215,60 +255,39 @@
   }
 }
 
-.resultsHeader {
-  font-size: 24px;
-  text-align: center;
-  text-shadow: 0 0 10px #c0ffc0;
-  letter-spacing: 2px;
-  padding: 12px;
-  background-color: rgba(192, 255, 192, 0.1);
-  border: 2px solid #c0ffc0;
-}
-
-.divider {
-  text-align: center;
-  opacity: 0.3;
-  font-size: 12px;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 .distanceDisplay {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 24px;
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  padding: 20px;
+  border-top: 1px solid rgba(192, 255, 192, 0.3);
+  border-bottom: 1px solid rgba(192, 255, 192, 0.3);
 }
 
 .distanceLabel {
-  font-size: 18px;
+  font-size: 16px;
   opacity: 0.8;
   letter-spacing: 1px;
 }
 
 .distanceValue {
-  font-size: 36px;
+  font-size: 32px;
   text-shadow: 0 0 15px #c0ffc0;
   letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .directionDisplay {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 24px;
-  background-color: rgba(192, 255, 192, 0.05);
-  border: 2px solid #c0ffc0;
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
+  gap: 12px;
+  padding: 20px;
 }
 
 .directionLabel {
-  font-size: 18px;
+  font-size: 16px;
   opacity: 0.8;
   letter-spacing: 1px;
 }
@@ -282,14 +301,13 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(192, 255, 192, 0.05);
-  box-shadow:
-    0 0 20px rgba(192, 255, 192, 0.3),
+  box-shadow: 0 0 20px rgba(192, 255, 192, 0.3),
     inset 0 0 20px rgba(192, 255, 192, 0.1);
   position: relative;
 }
 
 .compass::before {
-  content: 'N';
+  content: "N";
   position: absolute;
   top: 8px;
   font-size: 16px;
@@ -304,76 +322,26 @@
 }
 
 .directionValue {
-  font-size: 28px;
+  font-size: 24px;
   text-shadow: 0 0 12px #c0ffc0;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-weight: bold;
 }
 
-.updateButton {
-  padding: 16px 32px;
-  font-size: 20px;
-  color: #c0ffc0;
-  background-color: rgba(192, 255, 192, 0.1);
-  border: 2px solid #c0ffc0;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
-  transition: all 0.2s ease;
-  min-height: 56px;
-  font-family: var(--font-vt323);
-  letter-spacing: 1px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.updateButton:active {
-  background-color: rgba(192, 255, 192, 0.3);
-  transform: scale(0.98);
-  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
-}
-
-.footer {
-  text-align: center;
-  padding: 16px;
-  margin-top: 20px;
-}
-
-.footerText {
-  font-size: 16px;
+.directionDegrees {
+  font-size: 18px;
   opacity: 0.7;
-  animation: pulse 2s ease-in-out infinite;
+  letter-spacing: 1px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 400px) {
-  .title {
-    font-size: 28px;
-  }
-
-  .instructions {
-    font-size: 16px;
-  }
-
-  .infoRow {
-    font-size: 14px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .value {
-    font-size: 16px;
-  }
-
-  .locateButton {
-    font-size: 20px;
-    padding: 16px 24px;
-  }
-
+@media (max-width: 375px) {
   .distanceValue {
     font-size: 28px;
   }
 
   .directionValue {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .compass {

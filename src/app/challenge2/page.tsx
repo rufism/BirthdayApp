@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './page.module.css';
-import { useGameStore } from '@/store/useGameStore';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
+import { useGameStore } from "@/store/useGameStore";
 
 export default function Challenge2() {
   const router = useRouter();
-  const { isAuthenticated, completeChallenge2, challenge2Complete } = useGameStore();
+  const { isAuthenticated, completeChallenge2, challenge2Complete } =
+    useGameStore();
 
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/');
+      router.push("/");
     }
   }, [isAuthenticated, router]);
 
@@ -20,19 +21,19 @@ export default function Challenge2() {
   const [grid, setGrid] = useState<boolean[][]>([
     [false, false, false],
     [false, false, false],
-    [false, false, false]
+    [false, false, false],
   ]);
   const [isComplete, setIsComplete] = useState(false);
 
   // Check if all lights are on
   useEffect(() => {
-    const allOn = grid.every(row => row.every(cell => cell === true));
+    const allOn = grid.every((row) => row.every((cell) => cell === true));
     if (allOn && !isComplete) {
       setIsComplete(true);
       completeChallenge2();
       // Navigate back to main after a short delay
       setTimeout(() => {
-        router.push('/main');
+        router.back();
       }, 2000);
     }
   }, [grid, isComplete, completeChallenge2, router]);
@@ -41,8 +42,8 @@ export default function Challenge2() {
   const toggleLight = (row: number, col: number) => {
     if (isComplete) return; // Don't allow changes after completion
 
-    setGrid(prevGrid => {
-      const newGrid = prevGrid.map(r => [...r]);
+    setGrid((prevGrid) => {
+      const newGrid = prevGrid.map((r) => [...r]);
 
       // Toggle the clicked cell
       newGrid[row][col] = !newGrid[row][col];
@@ -74,7 +75,7 @@ export default function Challenge2() {
     setGrid([
       [false, false, false],
       [false, false, false],
-      [false, false, false]
+      [false, false, false],
     ]);
     setIsComplete(false);
   };
@@ -82,8 +83,15 @@ export default function Challenge2() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>CHALLENGE 2: LIGHTS OUT</h1>
-        <p className={styles.subtitle}>TAP A LIGHT TO TOGGLE IT AND NEIGHBORS</p>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>CHALLENGE 2: LIGHTS OUT</h1>
+          <button className={styles.backButton} onClick={() => router.back()}>
+            ←
+          </button>
+        </div>
+        <p className={styles.subtitle}>
+          TAP A LIGHT TO TOGGLE IT AND NEIGHBORS
+        </p>
       </div>
 
       <div className={styles.activeContent}>
@@ -104,14 +112,14 @@ export default function Challenge2() {
 
         {isComplete && (
           <div className={styles.celebration}>
-            <h2 className={styles.celebrationText}>You won! 🎉</h2>
+            <h2 className={styles.celebrationText}>SUCCESS</h2>
           </div>
         )}
       </div>
 
       <div className={styles.controls}>
         <button className={styles.resetButton} onClick={resetGame}>
-          {isComplete ? 'PLAY AGAIN' : 'RESET'}
+          {isComplete ? "PLAY AGAIN" : "RESET"}
         </button>
       </div>
     </div>

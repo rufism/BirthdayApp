@@ -124,7 +124,7 @@ export default function MainPage() {
       <div className={styles.container}>
         <div className={styles.loader}>
           <div className={styles.loaderHeader}>
-            <p>AGENT TERMINAL v2.4.1</p>
+            <p>P.E.N.1.5 TERMINAL</p>
             <p>INITIALIZING SECURE CONNECTION...</p>
           </div>
           <div className={styles.loadingBar}>
@@ -137,7 +137,6 @@ export default function MainPage() {
             <p>
               {">"} LOADING AGENT DATA... {loadingProgress}%
             </p>
-            <p className={styles.blink}>{">"} _</p>
           </div>
         </div>
       </div>
@@ -153,9 +152,7 @@ export default function MainPage() {
             <p className={styles.headerText}>
               PROTECTIVE ELECTRONIC NETWORK 1.5 [P.E.N.1.5]
             </p>
-            <p className={styles.headerText}>
-              CONNECTION SECURELY ENCRYPTION WRAPPED
-            </p>
+            <p className={styles.headerText}>CONNECTION SECURE</p>
           </div>
 
           {/* Agent info - full */}
@@ -187,16 +184,28 @@ export default function MainPage() {
             <p className={styles.infoLabel}>AGE:</p>
             <p className={styles.infoValue}>34</p>
 
-            <p className={styles.infoLabel}>FOND OF:</p>
-            <p className={styles.infoValue}>TULIPS/WALKS ON BEACH</p>
+            <p className={styles.infoLabel}>THREAT LEVEL:</p>
+            <p className={styles.infoValue}>INCONVENIENCE</p>
           </div>
 
           {/* Description - full */}
           <div className={styles.descriptionBox}>
             <div className={styles.descriptionText}>
               <p className={styles.welcomeText}>
-                Welcome Agent. Your mission to locate CIPHER is underway. Time
-                is critical. We only get one shot at this. Good luck.
+                Target has initiated protocol: UNNECESSARY COMPLEXITY.
+              </p>
+
+              <p className={styles.welcomeText}>
+                Instead of sharing his location like a functioning adult,
+                he&apos;s scattered clues across three cryptographic challenges.
+              </p>
+
+              <p className={styles.welcomeText}>
+                Your mission: Solve these puzzles to unlock his coordinates.
+              </p>
+
+              <p className={styles.welcomeText}>
+                PROCEED WITH CAUTION (and low expectations)
               </p>
 
               <p className={styles.menuHeader}>SELECT MISSION:</p>

@@ -2,34 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
 import KeypadButton from "@/components/KeypadButton";
-
-// Valid passcodes
-const VALID_PASSCODES = [
-  "53712",
-  "84629",
-  "19456",
-  "67238",
-  "42891",
-  "95314",
-  "28765",
-  "71043",
-  "36582",
-  "50927",
-  "63148",
-  "89271",
-  "14536",
-  "72904",
-  "48165",
-  "91738",
-  "25649",
-  "67823",
-  "30587",
-  "74293",
-];
+import { isValidPasscode } from "@/config/profiles";
 
 export default function Home() {
   const [code, setCode] = useState<string>("");
@@ -52,8 +28,8 @@ export default function Home() {
   const handleSubmit = () => {
     if (code.length === 5) {
       // Check if the code is valid
-      if (VALID_PASSCODES.includes(code)) {
-        setAuthenticated(true);
+      if (isValidPasscode(code)) {
+        setAuthenticated(true, code);
         router.push("/main");
       } else {
         setError(true);
@@ -70,22 +46,18 @@ export default function Home() {
     <div className={styles.container}>
       {/* P.E.N.1.5 logo at top */}
       <div className={styles.logoSection}>
-        <p>PROTECTIVE</p>
-        <p>ELECTRONIC</p>
-        <p>NETWORK</p>
-        <p>1.5</p>
+        <p>PROTECTIVE ELECTRONIC NETWORK 1.5</p>
       </div>
 
       {/* Five-digit code display in center */}
       <div className={`${styles.codeDisplay} ${error ? styles.error : ""}`}>
-        <div>
+        <div className={styles.codeDigits}>
           {[0, 1, 2, 3, 4].map((index) => (
             <div key={index} className={styles.codeDigit}>
               {code[index] || "_"}
             </div>
           ))}
         </div>
-        {error && <div className={styles.errorMessage}>INVALID PASSCODE</div>}
       </div>
 
       {/* Keypad at bottom */}

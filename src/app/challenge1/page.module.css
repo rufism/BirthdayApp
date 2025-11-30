@@ -17,11 +17,46 @@
   gap: 8px;
 }
 
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .title {
   font-size: 24px;
   margin: 0 0 8px 0;
   letter-spacing: 2px;
   text-shadow: 0 0 10px #c0ffc0;
+  flex: 1;
+}
+
+.backButton {
+  background-color: transparent;
+  color: #c0ffc0;
+  border: 2px solid #c0ffc0;
+  font-family: var(--font-vt323);
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 0 0 8px #c0ffc0;
+  box-shadow: 0 0 10px rgba(192, 255, 192, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.backButton:active {
+  background-color: rgba(192, 255, 192, 0.3);
+  transform: scale(0.95);
+  box-shadow: 0 0 15px rgba(192, 255, 192, 0.4);
 }
 
 .subtitle {
@@ -39,15 +74,15 @@
 }
 
 .cipherDisplay {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 8px;
   padding: 16px;
   background-color: rgba(192, 255, 192, 0.05);
   border: 2px solid #c0ffc0;
   box-shadow: 0 0 15px rgba(192, 255, 192, 0.2);
-  align-content: flex-start;
-  justify-content: center;
+  align-items: flex-start;
   flex: 1;
   overflow-y: auto;
 }
@@ -67,6 +102,38 @@
 
 .cipherDisplay::-webkit-scrollbar-thumb:hover {
   background: rgba(192, 255, 192, 0.5);
+}
+
+.messageDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.successText {
+  font-size: 36px;
+  color: #c0ffc0;
+  margin: 0;
+  text-shadow: 0 0 20px #c0ffc0;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.errorText {
+  font-size: 36px;
+  color: #ff4444;
+  margin: 0;
+  text-shadow: 0 0 20px #ff4444;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.wordRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .cipherLetterContainer {
@@ -116,6 +183,16 @@
   justify-content: center;
 }
 
+.decodedLetterPunctuation {
+  font-size: 20px;
+  color: #00ccff;
+  text-align: center;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .space {
   width: 8px;
   height: 44px;
@@ -124,7 +201,7 @@
 .punctuation {
   font-size: 24px;
   color: #c0ffc0;
-  width: 44px;
+  width: 8px;
   height: 44px;
   display: flex;
   align-items: center;
