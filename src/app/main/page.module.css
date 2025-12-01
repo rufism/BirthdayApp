@@ -150,7 +150,7 @@
 }
 
 .agentInfoText {
-  font-size: 16px;
+  font-size: 20px;
   text-shadow: 0 0 8px #c0ffc0;
   line-height: 1.4;
   text-align: center;
@@ -158,7 +158,7 @@
 
 @media (max-width: 500px) {
   .agentInfoText {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 
@@ -180,6 +180,7 @@
   width: 100%;
   height: auto;
   max-width: 150px;
+  filter: hue-rotate(315deg);
 }
 
 /* Info Box - Takes up 1 row */

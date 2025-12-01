@@ -284,6 +284,7 @@
   align-items: center;
   gap: 12px;
   padding: 20px;
+  border-bottom: 1px solid rgba(192, 255, 192, 0.3);
 }
 
 .directionLabel {
@@ -292,37 +293,8 @@
   letter-spacing: 1px;
 }
 
-.compass {
-  width: 120px;
-  height: 120px;
-  border: 3px solid #c0ffc0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(192, 255, 192, 0.05);
-  box-shadow: 0 0 20px rgba(192, 255, 192, 0.3),
-    inset 0 0 20px rgba(192, 255, 192, 0.1);
-  position: relative;
-}
-
-.compass::before {
-  content: "N";
-  position: absolute;
-  top: 8px;
-  font-size: 16px;
-  opacity: 0.7;
-}
-
-.compassArrow {
-  font-size: 60px;
-  text-shadow: 0 0 15px #c0ffc0;
-  transition: transform 0.5s ease;
-  line-height: 1;
-}
-
 .directionValue {
-  font-size: 24px;
+  font-size: 32px;
   text-shadow: 0 0 12px #c0ffc0;
   letter-spacing: 3px;
   font-weight: bold;
@@ -334,6 +306,29 @@
   letter-spacing: 1px;
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(192, 255, 192, 0.3);
+  margin: 8px 0;
+}
+
+.meetingInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.meetingText {
+  font-size: 18px;
+  text-shadow: 0 0 10px #c0ffc0;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
 /* Responsive adjustments */
 @media (max-width: 375px) {
   .distanceValue {
@@ -341,15 +336,10 @@
   }
 
   .directionValue {
-    font-size: 20px;
+    font-size: 28px;
   }
 
-  .compass {
-    width: 100px;
-    height: 100px;
-  }
-
-  .compassArrow {
-    font-size: 50px;
+  .meetingText {
+    font-size: 16px;
   }
 }

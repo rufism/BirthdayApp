@@ -4,10 +4,12 @@ import { persist } from 'zustand/middleware';
 type GameState = {
   isAuthenticated: boolean;
   activePasscode: string | null;
+  hasSeenLoadingScreen: boolean;
   challenge1Complete: boolean;
   challenge2Complete: boolean;
   challenge3Complete: boolean;
   setAuthenticated: (value: boolean, passcode?: string) => void;
+  markLoadingScreenSeen: () => void;
   completeChallenge1: () => void;
   completeChallenge2: () => void;
   completeChallenge3: () => void;
@@ -20,6 +22,7 @@ export const useGameStore = create<GameState>()(
     (set, get) => ({
       isAuthenticated: false,
       activePasscode: null,
+      hasSeenLoadingScreen: false,
       challenge1Complete: false,
       challenge2Complete: false,
       challenge3Complete: false,
@@ -27,8 +30,10 @@ export const useGameStore = create<GameState>()(
       setAuthenticated: (value: boolean, passcode?: string) =>
         set({
           isAuthenticated: value,
-          activePasscode: passcode || null
+          activePasscode: passcode || null,
+          hasSeenLoadingScreen: false // Reset when logging in
         }),
+      markLoadingScreenSeen: () => set({ hasSeenLoadingScreen: true }),
       completeChallenge1: () => set({ challenge1Complete: true }),
       completeChallenge2: () => set({ challenge2Complete: true }),
       completeChallenge3: () => set({ challenge3Complete: true }),
@@ -46,6 +51,7 @@ export const useGameStore = create<GameState>()(
         set({
           isAuthenticated: false,
           activePasscode: null,
+          hasSeenLoadingScreen: false,
           challenge1Complete: false,
           challenge2Complete: false,
           challenge3Complete: false,

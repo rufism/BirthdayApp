@@ -19,8 +19,8 @@ export default function Challenge2() {
 
   // Initialize 3x3 grid - all lights off (false)
   const [grid, setGrid] = useState<boolean[][]>([
-    [false, false, false],
-    [false, false, false],
+    [false, true, false],
+    [false, false, true],
     [false, false, false],
   ]);
   const [isComplete, setIsComplete] = useState(false);
@@ -73,8 +73,8 @@ export default function Challenge2() {
   // Reset the game
   const resetGame = () => {
     setGrid([
-      [false, false, false],
-      [false, false, false],
+      [false, true, false],
+      [false, false, true],
       [false, false, false],
     ]);
     setIsComplete(false);
@@ -84,13 +84,13 @@ export default function Challenge2() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>CHALLENGE 2: LIGHTS OUT</h1>
+          <h1 className={styles.title}>CHALLENGE 2: QUANTUM TOGGLE MATRIX</h1>
           <button className={styles.backButton} onClick={() => router.back()}>
             ←
           </button>
         </div>
         <p className={styles.subtitle}>
-          TAP A LIGHT TO TOGGLE IT AND NEIGHBORS
+          TAP A LIGHT TO TOGGLE IT AND NEIGHBORS. TURN ALL ON
         </p>
       </div>
 
@@ -119,7 +119,7 @@ export default function Challenge2() {
 
       <div className={styles.controls}>
         <button className={styles.resetButton} onClick={resetGame}>
-          {isComplete ? "PLAY AGAIN" : "RESET"}
+          RESET
         </button>
       </div>
     </div>

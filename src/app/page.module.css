@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
   min-height: 100svh;
   background: repeating-linear-gradient(
@@ -12,17 +13,36 @@
       transparent 4px
     ),
     radial-gradient(ellipse at center, #152d15 0%, #0a150a 50%, #030803 100%);
-  padding: 8px 8px;
+  padding: 8px;
   font-family: var(--font-vt323);
 }
 
+.loginContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.lockImage {
+  display: flex;
+  justify-content: center;
+  filter: drop-shadow(0 0 10px rgba(192, 255, 192, 0.3));
+}
+
+.logoSection {
+  text-align: center;
+}
+
 .logoSection p {
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1.2;
   margin: 0;
+  color: #c0ffc0;
   text-shadow: 0 0 10px #c0ffc0;
   letter-spacing: 2px;
-  text-align: center;
 }
 
 .logoSection pre {
@@ -39,9 +59,9 @@
 }
 
 .codeDisplay {
-  flex: 1;
-  padding: 40px 0;
-  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .codeDigits {
@@ -95,14 +115,14 @@
 }
 
 .keypad {
-  padding-bottom: 8px;
+  width: 100%;
 }
 
 .keypadGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .keypadButton {

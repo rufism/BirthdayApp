@@ -181,7 +181,7 @@ export default function Locator() {
             ←
           </button>
         </div>
-        <p className={styles.subtitle}>DETERMINE DISTANCE AND DIRECTION</p>
+        <p className={styles.subtitle}>SEE YOU THERE</p>
       </div>
 
       <div className={styles.activeContent}>
@@ -223,22 +223,19 @@ export default function Locator() {
 
             <div className={styles.directionDisplay}>
               <div className={styles.directionLabel}>BEARING</div>
-              <div className={styles.compass}>
-                <div
-                  className={styles.compassArrow}
-                  style={{
-                    transform: `rotate(${locationData.compassDegrees}deg)`,
-                  }}
-                >
-                  ↑
-                </div>
-              </div>
               <div className={styles.directionValue}>
                 {locationData.direction}
               </div>
               <div className={styles.directionDegrees}>
                 {Math.round(locationData.compassDegrees)}°
               </div>
+            </div>
+
+            <div className={styles.meetingInfo}>
+              <div className={styles.meetingText}>
+                MEET AT SELECT START @ 8:30 PM
+              </div>
+              <div className={styles.meetingText}>ON FRIDAY, DEC. 19</div>
             </div>
           </div>
         )}

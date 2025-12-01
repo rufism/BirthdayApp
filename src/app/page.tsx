@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
 import KeypadButton from "@/components/KeypadButton";
@@ -44,43 +45,56 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* P.E.N.1.5 logo at top */}
-      <div className={styles.logoSection}>
-        <p>PROTECTIVE ELECTRONIC NETWORK 1.5</p>
-      </div>
-
-      {/* Five-digit code display in center */}
-      <div className={`${styles.codeDisplay} ${error ? styles.error : ""}`}>
-        <div className={styles.codeDigits}>
-          {[0, 1, 2, 3, 4].map((index) => (
-            <div key={index} className={styles.codeDigit}>
-              {code[index] || "_"}
-            </div>
-          ))}
+      <div className={styles.loginContent}>
+        {/* Lock image */}
+        <div className={styles.lockImage}>
+          <Image
+            src="/ascii_lock_art_transparent.png"
+            alt="Lock"
+            width={120}
+            height={120}
+            priority
+          />
         </div>
-      </div>
 
-      {/* Keypad at bottom */}
-      <div className={styles.keypad}>
-        <div className={styles.keypadGrid}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-            <KeypadButton
-              key={digit}
-              size="large"
-              onClick={() => handleKeyPress(digit.toString())}
-            >
-              {digit}
+        {/* P.E.N.1.5 title */}
+        <div className={styles.logoSection}>
+          <p>PROTECTIVE ELECTRONIC NETWORK 1.5</p>
+        </div>
+
+        {/* Five-digit code display */}
+        <div className={`${styles.codeDisplay} ${error ? styles.error : ""}`}>
+          <div className={styles.codeDigits}>
+            {[0, 1, 2, 3, 4].map((index) => (
+              <div key={index} className={styles.codeDigit}>
+                {code[index] || "_"}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Keypad */}
+        <div className={styles.keypad}>
+          <div className={styles.keypadGrid}>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
+              <KeypadButton
+                key={digit}
+                size="large"
+                onClick={() => handleKeyPress(digit.toString())}
+              >
+                {digit}
+              </KeypadButton>
+            ))}
+            <KeypadButton size="large" onClick={handleClear}>
+              CLR
             </KeypadButton>
-          ))}
-          <KeypadButton size="large" onClick={handleClear}>
-            CLR
-          </KeypadButton>
-          <KeypadButton size="large" onClick={() => handleKeyPress("0")}>
-            0
-          </KeypadButton>
-          <KeypadButton size="large" onClick={handleSubmit}>
-            OK
-          </KeypadButton>
+            <KeypadButton size="large" onClick={() => handleKeyPress("0")}>
+              0
+            </KeypadButton>
+            <KeypadButton size="large" onClick={handleSubmit}>
+              OK
+            </KeypadButton>
+          </div>
         </div>
       </div>
     </div>

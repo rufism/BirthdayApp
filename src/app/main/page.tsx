@@ -1,23 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useGameStore } from "@/store/useGameStore";
+import { getProfile } from "@/config/profiles";
 
 export default function MainPage() {
   const router = useRouter();
   const {
     isAuthenticated,
+    activePasscode,
+    hasSeenLoadingScreen,
+    markLoadingScreenSeen,
     challenge1Complete,
     challenge2Complete,
     challenge3Complete,
     allChallengesComplete,
   } = useGameStore();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasSeenLoadingScreen);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [timeSinceLogin, setTimeSinceLogin] = useState("");
+
+  // Get the profile to display agent name
+  const profile = useMemo(() => {
+    if (!activePasscode) return null;
+    return getProfile(activePasscode);
+  }, [activePasscode]);
 
   // Calculate countdown to December 19, 2025 at 8:30 PM
   useEffect(() => {
@@ -69,55 +79,56 @@ export default function MainPage() {
   }, [isAuthenticated, router]);
 
   useEffect(() => {
-    // Simulate loading progress in chunks with a stall
-    const chunkSize = 5; // Load in 5% chunks for terminal feel
-    const stallPoint = 45; // Stall around 45%
-    const normalDelay = 80; // Normal chunk delay in ms
-    const stallDelay = 800; // How long to stall in ms
+    // Only run loading animation if we haven't seen it yet
+    if (!hasSeenLoadingScreen) {
+      // Simulate loading progress in chunks with a stall
+      const chunkSize = 5; // Load in 5% chunks for terminal feel
+      const stallPoint = 45; // Stall around 45%
+      const normalDelay = 80; // Normal chunk delay in ms
+      const stallDelay = 800; // How long to stall in ms
 
-    let currentProgress = 0;
-    let isStalling = false;
+      let currentProgress = 0;
+      let isStalling = false;
 
-    const loadNextChunk = () => {
-      setLoadingProgress((prev) => {
-        currentProgress = prev;
+      const loadNextChunk = () => {
+        setLoadingProgress((prev) => {
+          currentProgress = prev;
 
-        // If we've reached 100%, finish
-        if (currentProgress >= 100) {
-          setTimeout(() => setLoading(false), 300);
-          return 100;
-        }
+          // If we've reached 100%, finish
+          if (currentProgress >= 100) {
+            setTimeout(() => {
+              setLoading(false);
+              markLoadingScreenSeen();
+            }, 300);
+            return 100;
+          }
 
-        // If we've reached the stall point and haven't stalled yet
-        if (currentProgress === stallPoint && !isStalling) {
-          isStalling = true;
-          // Wait longer before next chunk
-          setTimeout(loadNextChunk, stallDelay);
-          return prev; // Don't increment this time
-        }
+          // If we've reached the stall point and haven't stalled yet
+          if (currentProgress === stallPoint && !isStalling) {
+            isStalling = true;
+            // Wait longer before next chunk
+            setTimeout(loadNextChunk, stallDelay);
+            return prev; // Don't increment this time
+          }
 
-        // Normal progression
-        const nextProgress = Math.min(currentProgress + chunkSize, 100);
+          // Normal progression
+          const nextProgress = Math.min(currentProgress + chunkSize, 100);
 
-        if (nextProgress < 100) {
-          setTimeout(loadNextChunk, normalDelay);
-        } else {
-          // Final chunk
-          setTimeout(loadNextChunk, normalDelay);
-        }
+          if (nextProgress < 100) {
+            setTimeout(loadNextChunk, normalDelay);
+          } else {
+            // Final chunk
+            setTimeout(loadNextChunk, normalDelay);
+          }
 
-        return nextProgress;
-      });
-    };
+          return nextProgress;
+        });
+      };
 
-    // Start the loading
-    setTimeout(loadNextChunk, normalDelay);
-
-    // Cleanup function (though not much to clean up with this approach)
-    return () => {
-      // Any cleanup if needed
-    };
-  }, []);
+      // Start the loading
+      setTimeout(loadNextChunk, normalDelay);
+    }
+  }, [hasSeenLoadingScreen, markLoadingScreenSeen]);
 
   if (loading) {
     return (
@@ -191,6 +202,12 @@ export default function MainPage() {
           {/* Description - full */}
           <div className={styles.descriptionBox}>
             <div className={styles.descriptionText}>
+              {profile && (
+                <p className={styles.welcomeText}>
+                  WELCOME, AGENT {profile.name.toUpperCase()}
+                </p>
+              )}
+
               <p className={styles.welcomeText}>
                 Target has initiated protocol: UNNECESSARY COMPLEXITY.
               </p>
@@ -217,7 +234,7 @@ export default function MainPage() {
                   }`}
                   onClick={() => router.push("/challenge1")}
                 >
-                  1. DECRYPT CIPHER FILES {challenge1Complete && "[✓]"}
+                  1. SEMANTIC DECONSTRUCTION {challenge1Complete && "[✓]"}
                 </button>
                 <button
                   className={`${styles.menuItem} ${
@@ -225,7 +242,7 @@ export default function MainPage() {
                   }`}
                   onClick={() => router.push("/challenge2")}
                 >
-                  2. TRACE NETWORK LOGS {challenge2Complete && "[✓]"}
+                  2. QUANTUM TOGGLE MATRIX {challenge2Complete && "[✓]"}
                 </button>
                 <button
                   className={`${styles.menuItem} ${
@@ -233,7 +250,7 @@ export default function MainPage() {
                   }`}
                   onClick={() => router.push("/challenge3")}
                 >
-                  3. INVESTIGATE LAST LOCATION {challenge3Complete && "[✓]"}
+                  3. SEQUENTIAL CIPHER ANALYSIS {challenge3Complete && "[✓]"}
                 </button>
                 {allChallengesComplete() ? (
                   <button

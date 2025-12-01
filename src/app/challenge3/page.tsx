@@ -123,12 +123,14 @@ export default function Challenge3() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>CHALLENGE 3: MASTERMIND</h1>
+          <h1 className={styles.title}>
+            CHALLENGE 3: SEQUENTIAL CIPHER ANALYSIS
+          </h1>
           <button className={styles.backButton} onClick={() => router.back()}>
             ←
           </button>
         </div>
-        <p className={styles.subtitle}>CRACK THE 4-DIGIT CODE! 10 ATTEMPTS</p>
+        <p className={styles.subtitle}>CRACK THE 4-DIGIT CODE IN 10 ATTEMPTS</p>
       </div>
 
       {/* Previous guesses */}
@@ -241,9 +243,6 @@ export default function Challenge3() {
             <p className={styles.secretReveal}>
               The code was: {secretCode.join(" ")}
             </p>
-            <button className={styles.resetButton} onClick={generateSecretCode}>
-              NEW GAME
-            </button>
           </div>
         )}
       </div>

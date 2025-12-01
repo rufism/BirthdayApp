@@ -14,11 +14,11 @@ const CIPHER_MESSAGES = [
     answer: "HELLO AGENT, YOU HAVE FOUND THE FIRST CHALLENGE",
   },
   {
-    cipher: "NY'X 'WJANFSSY'. NY'X KWJSHM",
-    answer: "IT'S 'REVENANT' IT'S FRENCH",
+    cipher: "NY'X WJAJFSFY, NY'X KWJFHM",
+    answer: "IT'S REVENANT, IT'S FRENCH",
   },
   {
-    cipher: "FVBYL ALHYDPUN TL HWYAL SPZH",
+    cipher: "FVB'YL ALHYDPU TL HWHYA SDZH",
     answer: "YOU'RE TEARING ME APART LISA",
   },
   {
@@ -26,12 +26,16 @@ const CIPHER_MESSAGES = [
     answer: "HE WAS A SKATER BOY",
   },
   {
-    cipher: "FQJA? WX VXWTN? QNNNNNNAN",
-    answer: "WHAT? NO MONEY? HEEEEEERE",
+    cipher: "FQJA? WX VXWNT? QNNNBN",
+    answer: "WHAT? NO MONEY? HEEERE",
   },
   {
     cipher: "T OTOW'E... T OTOW'E VTJJ STX",
     answer: "I DIDN'T... I DIDN'T KILL HIM",
+  },
+  {
+    cipher: "AXPL, YTNW, TVQ WATZXHHT NTYX PLOXX",
+    answer: "SETH, KAMI, AND ISABELLA MAKE THREE",
   },
 ];
 
@@ -186,7 +190,7 @@ export default function Challenge1() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>CHALLENGE 1: DECRYPT</h1>
+          <h1 className={styles.title}>CHALLENGE 1: SEMANTIC DECONSTRUCTION</h1>
           <button className={styles.backButton} onClick={() => router.back()}>
             ←
           </button>
